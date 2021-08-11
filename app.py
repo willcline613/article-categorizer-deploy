@@ -7,9 +7,9 @@ app = Flask(__name__, static_url_path="/static")
 
 #input article options into this dataframe with same column names as how it started
 options_df = pd.read_csv('app_test_df.csv')
-print(options_df['article'])
 
-OUTPUTS = ["POLITICS", "Thousands of children from Central America are apprehended at the U.S.-Mexico border each year . Donald Trump’s administration is following a blanket policy of referring for prosecution all people who cross illegally . The change means that authorities send parents to jails and their children to the same agency ."]
+#Comment out or use the following variable when testing app without running model for expediency sake.
+OUTPUTS = ["WELLNESS", ' There are many studies on every aspect of happiness, the most coveted of all human achievements . Researchers define happiness as the ability to sustain an overall sense of well being over time . Happiness is not something to be earned, says author Sonja Lyubomirsky, Ph.D., author of The How of Happiness .']
 
 #Based off of just headline of dropdown, it returns the full data for that article in pandas df to be sent to "run_model" function
 def article_data_from_headline(headline, options_df):
@@ -30,22 +30,29 @@ def run_model():
     
     #get the whole row of just the headline you want and put it in data variable
     data = article_data_from_headline(headline, options_df)
-#     feature_values = extract_feature_values(data)
-    print(data["article"]) # Remove this when you're done debugging
+    
+    #from dataframe of 1, iloc and separate each thing needed
+    authors = data['authors'].item()
+    publish_date=data["date"].item()
+    headline=data["headline"].item()
+    article=data["article"].item()
 
-    # Send the values to the model to get a prediction
+
+    # This bit gets outputs from model or cheaty way from OUTPUTS var up top for expediency during testing
 #     outputs = get_model(data)
     outputs = OUTPUTS
+    
+    
     print("within run_model:")
     print(outputs[0])
     print(outputs[1])
-    print(data["authors"][0])
-    print(data["date"][0])
-    print(type(data["date"][0]))
-    print(str(data["date"][0]))
+    print(authors)
+    print(publish_date)
+    print(headline)
+    print(article)
 
     # Tell the browser to fetch the results page, passing along the prediction
-    return redirect(url_for("show_results", topic = outputs[0], summary=outputs[1], article=data["article"][0], headline=data["headline"][0], publish_date=data['date'][0], authors=data["authors"][0]))
+    return redirect(url_for("show_results", topic = outputs[0], summary=outputs[1], article=article, headline=headline, publish_date=publish_date, authors=authors))
 
 @app.route("/show_results")
 def show_results():
