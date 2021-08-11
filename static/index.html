@@ -8,6 +8,11 @@
     <title>Categorize and Summarize Articles</title>
     <link rel="stylesheet" media="screen" href="/static/bootstrap.min.css">
     <!-- If you add custom CSS, put it after the above bootstrap link -->
+       <!--Allows indent-->
+      <style>
+          .tab { margin-left: 40px; }
+          .highlight {color:#FFA17A}
+      </style>
   </head>
   <body style="background-color:black">
     <div class="container">
@@ -46,7 +51,7 @@
               nested <div>s to achieve the desired layout
             -->
             <form action="/run_model" method="post">
-              <label style="font-size:40px; color:#FFFBF0" for="input-3" >Article Options</label>
+              <label style="font-size:40px; color:#FFFBF0" for="input-3" >Sample Articles</label>
                 <br>
               <!--
                 Note on "select" (drop-down): the value is what is sent as the
@@ -77,19 +82,17 @@
           paragraphs. If you just hit enter, the text will "float" up to the
           previous line
         -->
-        <p style="font-size:32px; color:#FFFBF0">
-            Our team leveraged 200k web articles from the Huffington Post.
-            <br>
-             Each observation contains a headline, a one-sentence hook, and the article itself.
-        </p>
-        <p style="font-size:32px; color:#FFFBF0">
-            Through natural language processing models,
-            <br>
-            We sought to classify the web articles into topic categories
+        <p style="font-size:36px; color:#FFFBF0">
+            Our team leveraged <span class="highlight">200k web articles</span> from the Huffington Post. </p>
+        <p style="font-size:31px; color:#FFFBF0" class="tab">
+            Each observation contains a headline, a one-sentence hook, and the article itself. </p>
+        <p style="font-size:36px; color:#FFFBF0">Through natural language processing,</p>
+        <p style="font-size:31px; color:#FFFBF0" class="tab">
+            We sought to <span class="highlight">classify</span> the web articles into topic categories
             <br>
             and,
             <br>
-            We sought to summarize the web articles.
+            We sought to <span class="highlight">summarize</span> the web articles.
         </p>
       </div>
     </div>
